@@ -16,6 +16,21 @@ public class Numeros {
     /**
      * @param args the command line arguments
      */
+    public static Boolean esPrimo(int numero) {
+        Boolean Primo = true;
+        if (numero < 2) {
+            Primo = false;
+        } else {
+            for (int x = 2; x * x <= numero; x++) {
+                if (numero % x == 0) {
+                    Primo = false;
+                    break;
+                }
+            }
+        }
+        return Primo;
+    }
+
     public static void main(String[] args) {
         int numeros[][] = new int[2][10];
 
@@ -39,21 +54,28 @@ public class Numeros {
             System.out.print(numeros[1][i] + "  ");
         }
 
-        int primos = 0;
-        for (int i = 0; i < numeros.length; i++) {
-            int sumatorio = 0;
-            for (int j = 1; j <= numeros[1][i]; j++) {
-                if (numeros[1][i] % j == 0) {
-                    sumatorio++;
+        System.out.println("");
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (esPrimo(numeros[1][i]) == true && esPrimo(numeros[1][j]) == false) {
+                    int aux = numeros[1][i];
+                    numeros[1][i] = numeros[1][j];
+                    numeros[1][j] = aux;
                 }
             }
-
-            if (sumatorio == 2) {
-                System.out.print(i + " ");
-                primos++;
-            }
         }
-
+        
+        System.out.println("El array con los primos primero es: ");
+        for(int i=0; i<10; i++){
+            System.out.print(i+" ");
+        }
+        
+        System.out.println("");
+        
+        for(int i=0; i<10; i++){
+            System.out.print(numeros[1][i]+" ");
+        }
     }
 
 }
